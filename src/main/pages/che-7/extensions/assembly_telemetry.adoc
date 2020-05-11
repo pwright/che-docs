@@ -1,0 +1,48 @@
+---
+title: Telemetry
+keywords:
+tags: [telemetry]
+sidebar: che_7_docs
+permalink: che-7/telemetry/
+folder: che-7/extensions
+summary:
+---
+
+:page-liquid:
+:parent-context-of-telemetry: {context}
+
+[id="eclipse-che-telemetry_{context}"]
+= Telemetry
+
+Telemetry is the transparent and ethical collection of the usage data. By default, telemetry is not available in the {prod}, 
+but there is an abstract API that allows enabling telemetry via the plugin mechanism. This approach is used in the link:{site-baseurl}che-7/hosted-che/[Hosted Che] where telemetry is enabled for every workspace.
+
+== Use cases
+
+Eclipse Che telemetry API allows tracking:
+
+* Duration of workspace usage.
+* User-driven actions like file editing, committing and pushing to the remote repositories
+* The list of plugins enabled in the workspace
+* Programming languages and link:{site-baseurl}che-7/making-a-workspace-portable-using-a-devfile/devfiles[devfiles] used in the workspaces
+
+== How it works?
+
+TODO: Describe the overal mechanism
+
+image::telemetry/telemetry_diagram.png[]
+
+== Getting Started
+
+TODO: Describe the step-by-step flow for enabling telemetry via sidecar plugin for sending data to an external Analytics Service / Customer Data Platform
+
+* Extending link:https://github.com/che-incubator/che-workspace-telemetry-client[che-workspace-telemetry-client]
+* Describing abstract methods of the link:https://github.com/che-incubator/che-workspace-telemetry-client/blob/master/backend-base/src/main/java/org/eclipse/che/incubator/workspace/telemetry/base/AbstractAnalyticsManager.java[AbstractAnalyticsManager]
+* Example of the telemtry `plugin.yaml`
+
+[source,yaml,subs="+attributes"]
+----
+include::examples/telemetry/plugin.adoc[]
+----
+
+- Enabling the plugin in every workspace via `CHE_WORKSPACE_DEVFILE_DEFAULT__EDITOR_PLUGINS` environment variable (more datails about {prod} configuration using link:{site-baseurl}che-7/configuring-system-variables/[Environment Variables])	

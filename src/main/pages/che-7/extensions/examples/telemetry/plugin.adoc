@@ -1,0 +1,21 @@
+apiVersion: v2
+publisher: plugin-publisher
+name: telemetry-plugin
+version: 0.0.1
+type: Che Plugin
+displayName: Telemetry Plugin
+description: Telemetry plugin for sending information to the external analytics service 
+title: Telemetry Plugin
+category: Other
+spec:
+  workspaceEnv:
+    - name: CHE_WORKSPACE_TELEMETRY_BACKEND_PORT
+      value: '4167'
+  containers:
+  - name: che-workspace-telemetry-sidecar
+    image: che-workspace-telemetry-sidecar-image:latest
+    env:
+      - name: CHE_API
+        value: $(CHE_API_INTERNAL)
+      - name: EXTERNAL_ANALYTICS_SERVICE_SPECIFIC_ENV_VAR
+        value: ''
